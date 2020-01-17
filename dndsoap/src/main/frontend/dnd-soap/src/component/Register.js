@@ -1,12 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
 function Register() {
   return (
     <div>
-      <Router>
-        <Link to="/register">Register</Link>
-      </Router>
+      <a href={window.location.href + "register"}>Register</a>
     </div>
   );
 }

@@ -4,7 +4,8 @@ const path = require("path");
 module.exports = {
   resolve: { extensions: [".js", ".jsx"] },
   entry: {
-    index: "./src/index.js"
+    index: "./src/index.js",
+    figtPage: "./src/FightPage.js"
   },
   output: {
     path: path.resolve(__dirname, "../../resources/static/gen-js/")

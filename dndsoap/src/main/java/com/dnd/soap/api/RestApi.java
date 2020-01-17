@@ -36,16 +36,17 @@ public class RestApi {
 
   public RestApi() {}
 
-  @GetMapping(value = "/player-battles/{playerId}-")
-  public ResponseEntity<Map<String, String>> battlePhase(@PathVariable Long playerId) {
+  @GetMapping(value = "/player-battles/{playerId}-{battleId}")
+  public ResponseEntity<Map<String, String>> battlePhase(
+      @PathVariable Long playerId, @PathVariable Long battleId) {
     Link checkEncounterLink =
         linkTo(UserController.class).slash("user").slash(playerId).withSelfRel();
 
     return ResponseEntity.created(checkEncounterLink.toUri())
-        .body((userManagmentService.battleCalculator(playerId)));
+        .body((userManagmentService.battleCalculator(playerId, battleId)));
   }
 
-  @GetMapping(value = "/new-encounter")
+  @GetMapping(value = "/monster")
   public ResponseEntity<MonsterInfo> checkEncounter() {
     int encounter = rand.nextInt(49) + 1;
     MonsterInfo monster = userManagmentService.monsterEncounter(encounter);
@@ -60,9 +61,14 @@ public class RestApi {
     return ResponseEntity.ok().body(userManagmentService.login(username));
   }
 
-  @GetMapping
+  @GetMapping(value = "/players", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<PlayerInfo>> listAll() {
     return ResponseEntity.ok(userManagmentService.listUsers());
+  }
+
+  @GetMapping(value = "/players/{playerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<PlayerInfo> player(@PathVariable Long playerId) {
+    return ResponseEntity.ok().body(userManagmentService.getPlayer(playerId));
   }
 
   @DeleteMapping("/{userId}")

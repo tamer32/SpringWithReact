@@ -43,6 +43,7 @@ public class UserManagmentServiceImpl implements UserManagmentService {
     player.setExp(0);
     player.setId(Calendar.getInstance().getTimeInMillis());
     player.setAttributes();
+    player.setBattleId(0L);
     users.add(player);
     return player;
   }
@@ -107,7 +108,7 @@ public class UserManagmentServiceImpl implements UserManagmentService {
   }
 
   @Override
-  public Map<String, String> battleCalculator(long playerId) {
+  public Map<String, String> battleCalculator(long playerId, Long battleId) {
     Integer gracefulDice = rand.nextInt(5) + 1;
     Integer skullDice = rand.nextInt(5) + 1;
     String message = "";
@@ -130,7 +131,9 @@ public class UserManagmentServiceImpl implements UserManagmentService {
           "This time the fate wasn't on your side and you lost to the beast and your hero died miserably.Create a new "
               + "character and go avenge your fallen hero!";
     }
+    battleId += 1;
     map.put("message", message);
+    map.put("battleId", battleId.toString());
 
     return map;
   }

@@ -5,6 +5,9 @@ isELIgnored="false"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core"%>
 <tf:layout>
   <h1>Prepare to fight!</h1>
+  <div id="fightPage">
+  </div>
+  <script src ="/gen-js/figtPage.js"></script>
   <div class="row">
     <div id="encounterDiv" style="width: 242">
       <div class="col-md-6">
@@ -103,43 +106,4 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </div>
   </div>
-
-  <script>
-    function battlePhase() { let urlId = window.location.pathname.split('/')[2];
-    $ .ajax({ type : "GET", url : "${pageContext.request.contextPath}" +
-    "/battle/" + urlId, success : function(response) {
-    document.getElementById("diceDiv").style.visibility = "visible";
-    document.getElementById("gracefulDice").innerHTML = "Graceful Dice: " +
-    response.gracefulDice; document.getElementById("skullDice").innerHTML =
-    "Skull Dice: " + response.skullDice;
-    document.getElementById("battleOutcome").innerHTML = response.message; if
-    (document.getElementById("battleOutcome").innerHTML .includes("This time the
-    fate wasn't on your side")) {
-    document.getElementById("createNewCharacter").style.visibility = "visible";
-    document.getElementById("rollTheDice").style.visibility = "hidden";
-    document.getElementById("fightAgain").style.visibility = "hidden";
-    document.getElementById("showCharacter").style.visibility = "hidden"; } else
-    if (document.getElementById("battleOutcome").innerHTML
-    .includes("Congratulations")) {
-    document.getElementById("rollTheDice").style.visibility = "hidden";
-    newEncounter(); document.getElementById("fightAgain").style.visibility =
-    "visible"; document.getElementById("showCharacter").style.visibility =
-    "visible"; } }, error: function (response){ console.dir(response); } }); }
-    function deleteUser() { let urlId =location.pathname.split('/')[2]; var Http
-    = new XMLHttpRequest(); Http.open("DELETE",
-    "${pageContext.request.contextPath}" + "/delete/" + urlId); Http.send();
-    window.location.replace("${pageContext.request.contextPath}" +"/register/")
-    } function redirectToCharacterScreen() { var Http = new XMLHttpRequest();
-    Http.open("GET", "${pageContext.request.contextPath}" + "/user/" +
-    location.href.substring(location.href.lastIndexOf('/') + 1)); Http.send();
-    window.location.replace("${pageContext.request.contextPath}" +"/user/" +
-    location.href.substring(location.href.lastIndexOf('/') + 1)); } function
-    newEncounter() { $ .ajax({ type : "GET", url :
-    "${pageContext.request.contextPath}" + "/newEncounter", success :
-    function(response) { document.getElementById("monsterName").innerHTML =
-    response.name; document.getElementById("monsterStats0").innerHTML =
-    response.stats.Strenght; document.getElementById("monsterStats1").innerHTML
-    = response.stats.Agility; document.getElementById("monsterStats2").innerHTML
-    = response.stats.Intelect; } }) }
-  </script>
 </tf:layout>

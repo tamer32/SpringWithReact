@@ -6,10 +6,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonGetter;
 
 public class PlayerInfo {
   private Long id;
+  private Long battleId;
 
   @NotBlank
   @Size(min = 2, max = 32)
@@ -20,6 +20,14 @@ public class PlayerInfo {
   @NotNull @NotEmpty String playerClass;
   private Map<String, Integer> playerAttributes = new HashMap<>();
 
+  public Long getBattleId() {
+    return battleId;
+  }
+
+  public void setBattleId(Long battleId) {
+    this.battleId = battleId;
+  }
+
   public Map<String, Integer> getPlayerAttributes() {
     return playerAttributes;
   }
@@ -28,7 +36,6 @@ public class PlayerInfo {
     this.playerAttributes = playerAttributes;
   }
 
-  @JsonGetter("playerClass")
   public String getPlayerClass() {
     return playerClass;
   }
@@ -42,7 +49,6 @@ public class PlayerInfo {
     this.playerClass = playerClass;
   }
 
-  @JsonGetter("username")
   public String getUsername() {
     return username;
   }

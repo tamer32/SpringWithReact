@@ -24,7 +24,7 @@ public interface UserManagmentService {
   public Integer calculatePowerRatio(
       MonsterInfo monster, PlayerInfo player, Integer skullDice, Integer gracefulDice);
 
-  public Map<String, String> battleCalculator(long playerId);
+  public Map<String, String> battleCalculator(long playerId, Long battleId);
 
   public List<PlayerInfo> listUsers();
 

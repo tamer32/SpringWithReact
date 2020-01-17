@@ -1,9 +1,8 @@
 import React from "react";
 import "./App.css";
-import "./component/component.js";
-import printH1 from "./component/component.js";
-import Register from "./component/Register.js";
+import Home from "./component/Home.js";
 import Header from "./component/Header.js";
+import { Router, Switch, Route } from "react-router";
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
         <Header />
       </div>
       <div>
-        <Register />
+        <Home />
       </div>
     </div>
   );

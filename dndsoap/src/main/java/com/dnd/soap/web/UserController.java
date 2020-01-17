@@ -94,6 +94,7 @@ public class UserController {
     return "characterPage";
   }
 
+  // Here is some not-rest URL. CHANGE It!!!
   @GetMapping("/fight/{user}")
   public String fightMethod(Model model, @PathVariable long user) {
     int encounter = rand.nextInt(49) + 1;
